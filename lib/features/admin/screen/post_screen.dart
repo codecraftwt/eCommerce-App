@@ -56,13 +56,13 @@ class _PostScreenState extends State<PostScreen> {
                 return Column(
                   children: [
                     SizedBox(
-                      height: 140,
+                      height: 130,
                       child: SingleProduct(
                         image: productData.images[0],
                       ),
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: Text(

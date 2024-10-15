@@ -2,6 +2,7 @@ import 'package:ecommerce_app/common/bottom_bar.dart';
 import 'package:ecommerce_app/features/SplashScreen/SplashScreen.dart';
 import 'package:ecommerce_app/features/address/screen/address_screen.dart';
 import 'package:ecommerce_app/features/admin/screen/add_product_screen.dart';
+import 'package:ecommerce_app/features/admin/screen/admin_screen.dart';
 import 'package:ecommerce_app/features/auth/screens/auth_screen.dart';
 import 'package:ecommerce_app/features/cart/screens/cart_screen.dart';
 import 'package:ecommerce_app/features/home/screens/category_deals_screen.dart';
@@ -18,7 +19,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const AuthScreen(),
       );
-
+    case AdminScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const AdminScreen(),
+      );
     case HomeScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,

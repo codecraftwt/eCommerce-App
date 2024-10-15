@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class BottomBar extends StatefulWidget {
-  static const String routeName = '/actual-home';
+  static const String routeName = '/BottomBar';
   const BottomBar({Key? key}) : super(key: key);
 
   @override

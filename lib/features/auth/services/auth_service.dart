@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:ecommerce_app/Provider/user_provider.dart';
+import 'package:ecommerce_app/common/bottom_bar.dart';
 import 'package:ecommerce_app/common/custom_tost.dart';
 import 'package:ecommerce_app/constants/error_handling.dart';
 import 'package:ecommerce_app/constants/global_variables.dart';
 import 'package:ecommerce_app/constants/utils.dart';
+import 'package:ecommerce_app/features/admin/screen/admin_screen.dart';
 import 'package:ecommerce_app/features/auth/screens/auth_screen.dart';
 import 'package:ecommerce_app/features/home/screens/home_screen.dart';
 import 'package:ecommerce_app/models/user.dart';
@@ -103,6 +105,7 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
+
       httpErrorHandle(
         response: res,
         context: context,
@@ -110,11 +113,21 @@ class AuthService {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            HomeScreen.routeName,
-            (route) => false,
-          );
+
+          final userType = jsonDecode(res.body)['type'];
+          if (userType == 'Seller') {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              AdminScreen.routeName,
+              (route) => false,
+            );
+          } else if (userType == 'Buyer') {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              BottomBar.routeName,
+              (route) => false,
+            );
+          }
           emailController.clear();
           passwordController.clear();
         },
@@ -122,7 +135,7 @@ class AuthService {
     } catch (e) {
       CommonToast.showToast(
         context: context,
-        message: e.toString(),
+        message: 'Failed to sign in. Please check your credentials.',
         autoCloseDuration: const Duration(seconds: 5),
         primaryColor: Colors.red,
       );

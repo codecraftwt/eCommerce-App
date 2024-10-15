@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 
@@ -6,9 +7,11 @@ const adminRouter = require("./routes/admin");
 const productRouter = require("./routes/product");
 const userRouter = require("./routes/user");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; 
 const app = express();
-const DB = "mongodb+srv://Akash123:Akash123@atlascluster.ucduvgm.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster"
+
+
+const DB = process.env.DB;
 
 //middleware
 app.use(express.json())

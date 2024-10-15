@@ -5,6 +5,7 @@ import 'package:ecommerce_app/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class AdminScreen extends StatefulWidget {
+  static const String routeName = '/admin-screen';
   const AdminScreen({super.key});
 
   @override
